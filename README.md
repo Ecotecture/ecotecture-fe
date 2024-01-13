@@ -1,4 +1,4 @@
-## Backend repository for Ecotecture, Hackfest 2024 project.
+## Frontend repository for Ecotecture, Hackfest 2024 project.
 ![image](https://github.com/Ecotecture/ecotecture-fe/assets/88271313/b02f2d0e-4be6-4736-9bb9-2c581eb875ca)
 
 --- 
