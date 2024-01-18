@@ -147,11 +147,10 @@ export default function Home() {
         </div>
         {/* Stories Row */}
         <div className="z-10 mb-44 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <div className="max-w-lg rounded overflow-hidden">
+          <div className="w-full rounded overflow-hidden">
             <div className="px-6 py-6">
-              <div className="font-sans font-semibold text-2xl mb-10">Read our Stories
-              </div>
-              <p className="text-gray-700 font-sans text-base mb-10">
+              <div className="font-sans font-semibold text-2xl mb-10">Read our Stories</div>
+              <p className="text-gray-700 font-sans text-base mb-10 max-w-lg">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
               </p>
             </div>
@@ -190,89 +189,89 @@ export default function Home() {
           </div>
 
           {
-           provinceData && (
-            <div className="max-w-lg rounded overflow-hidden shadow-lg">
-            <div className="px-6 py-4">
-              <div className="font-serif text-2xl tracking-wide mb-5 underline decoration-4 underline-offset-1 decoration-[#257251]">{provinceData?.name ?? ''}
+            provinceData && (
+              <div className="max-w-lg rounded overflow-hidden shadow-lg">
+                <div className="px-6 py-4">
+                  <div className="font-serif text-2xl tracking-wide mb-5 underline decoration-4 underline-offset-1 decoration-[#257251]">{provinceData?.name ?? ''}
+                  </div>
+                  <p className="text-gray-700 font-sans text-base mb-5">
+                    Here is your weather data:
+                  </p>
+                  <div className="relative overflow-x-auto mb-5">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-400">
+                      <tbody>
+                        <tr className="bg-white">
+                          <td scope="row" className="px-6 py-4 text-gray-400 whitespace-nowrap">
+                            Solar Hours per Day
+                          </td>
+                          <td className="px-6 py-4">
+                            {provinceData?.solar_hours_per_day ?? ''} Hours
+                          </td>
+                        </tr>
+                        <tr className="bg-white">
+                          <td scope="row" className="px-6 py-4 text-gray-400 whitespace-nowrap">
+                            Wind Strength
+                          </td>
+                          <td className="px-6 py-4">
+                            {provinceData?.wind_strength ?? ''} m
+                          </td>
+                        </tr>
+                        <tr className="bg-white">
+                          <td scope="row" className="px-6 py-4 text-gray-400 whitespace-nowrap">
+                            Rain power
+                          </td>
+                          <td className="px-6 py-4">
+                            {provinceData?.rain_power ?? ''}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-gray-700 font-sans text-base mb-5">
+                    Therefor we recommend you to use:
+                  </p>
+                  <div className="relative overflow-x-auto">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-400">
+                      <thead className="text-xs text-gray-400 uppercase">
+                        <tr>
+                          <th scope="col" className="px-6 py-3">
+                            High
+                          </th>
+                          <th scope="col" className="px-6 py-3">
+                            Moderate
+                          </th>
+                          <th scope="col" className="px-6 py-3">
+                            Low
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="bg-white">
+                          <td className="px-6 py-4">
+                            {highList.map((item, index) => (
+                              <div key={index}>{item}</div>
+                            ))}
+                          </td>
+                          <td className="px-6 py-4">
+                            {moderateList.map((item, index) => (
+                              <div key={index}>{item}</div>
+                            ))}
+                          </td>
+                          <td className="px-6 py-4">
+                            {lowList.map((element, index) => (
+                              <div key={index}>{element}</div>
+                            ))}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-              <p className="text-gray-700 font-sans text-base mb-5">
-                Here is your weather data:
-              </p>
-              <div className="relative overflow-x-auto mb-5">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-400">
-                  <tbody>
-                    <tr className="bg-white">
-                      <td scope="row" className="px-6 py-4 text-gray-400 whitespace-nowrap">
-                        Solar Hours per Day
-                      </td>
-                      <td className="px-6 py-4">
-                        {provinceData?.solar_hours_per_day ?? ''} Hours
-                      </td>
-                    </tr>
-                    <tr className="bg-white">
-                      <td scope="row" className="px-6 py-4 text-gray-400 whitespace-nowrap">
-                        Wind Strength
-                      </td>
-                      <td className="px-6 py-4">
-                        {provinceData?.wind_strength ?? ''} m
-                      </td>
-                    </tr>
-                    <tr className="bg-white">
-                      <td scope="row" className="px-6 py-4 text-gray-400 whitespace-nowrap">
-                        Rain power
-                      </td>
-                      <td className="px-6 py-4">
-                        {provinceData?.rain_power ?? ''}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-gray-700 font-sans text-base mb-5">
-                Therefor we recommend you to use:
-              </p>
-              <div className="relative overflow-x-auto">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-400">
-                  <thead className="text-xs text-gray-400 uppercase">
-                    <tr>
-                      <th scope="col" className="px-6 py-3">
-                        High
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Moderate
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Low
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="bg-white">
-                      <td className="px-6 py-4">
-                        {highList.map((item, index) => (
-                          <div key={index}>{item}</div>
-                        ))}
-                      </td>
-                      <td className="px-6 py-4">
-                        {moderateList.map((item, index) => (
-                          <div key={index}>{item}</div>
-                        ))}
-                      </td>
-                      <td className="px-6 py-4">
-                        {lowList.map((element, index) => (
-                          <div key={index}>{element}</div>
-                        ))}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-           ) 
+            )
           }
-          
-          
+
+
         </div>
       </div>
     </main>
