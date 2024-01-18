@@ -27,9 +27,59 @@ export default function Calculator() {
                             <p className="text-gray-700 font-sans text-base mb-10">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
                             </p>
-                            <div>
-                                
+
+
+                            <div className="relative overflow-x-auto">
+                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-sans">
+                                    <tbody>
+                                        <tr className="bg-white">
+                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                Electricity consumption
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <input type="text" id="electricity" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                kWh/yr
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-white">
+                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                Solar Hours
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <input type="text" id="solar_hours" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                Hours
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-white">
+                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                Panel Width
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <input type="text" id="panel_width" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                m
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-white">
+                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                Panel Length
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <input type="text" id="panel_length" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                m
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
