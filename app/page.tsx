@@ -188,7 +188,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="max-w-lg rounded overflow-hidden shadow-lg">
+
+          {
+           provinceData && (
+            <div className="max-w-lg rounded overflow-hidden shadow-lg">
             <div className="px-6 py-4">
               <div className="font-serif text-2xl tracking-wide mb-5 underline decoration-4 underline-offset-1 decoration-[#257251]">{provinceData?.name ?? ''}
               </div>
@@ -266,6 +269,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+           ) 
+          }
+          
+          
         </div>
       </div>
     </main>
