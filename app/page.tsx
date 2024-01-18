@@ -60,7 +60,8 @@ export default function Home() {
               </p>
               <div>
                 <form action="" className='flex items-center'>
-                  <button type="submit" className="flex items-center py-3 px-7 text-xs font-small text-white bg-[#257251] rounded border focus:ring-4 focus:outline-none focus:ring-blue-300">Calculator
+                  <button type="submit" className="flex items-center py-3 px-7 text-xs font-small text-white bg-[#257251] rounded border focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    <a href="/calculator">Calculator</a>
                   </button>
                 </form>
               </div>
