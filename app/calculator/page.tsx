@@ -273,7 +273,7 @@ export default function Calculator() {
                                         </tr>
                                         <tr className="bg-white">
                                                 <td scope="row" className="px-6 py-4 font-semibold whitespace-nowrap">
-                                                    Approximate price for the installation of {data.numPanels} solar panels:
+                                                    Approximate price for the installation of solar panel with house power of {power} VA:
                                                 </td>
                                         </tr>
                                         <tr>
@@ -303,7 +303,9 @@ export default function Calculator() {
                                                     <div className='grid grid-cols-2'>
                                                         <p>Total: </p>
                                                         <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.total)} </p>
+                                                        
                                                     </div>
+                                                    <p className='font-light'>*The lifetime of solar panels are approximately 25 years. </p>
                                                 </td>
                                         )}
                                         
