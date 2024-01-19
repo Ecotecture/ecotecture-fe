@@ -1,6 +1,95 @@
+"use client"
 import Image from 'next/image'
+import React, { useState, useEffect } from 'react';
+import provinceData from "@/public/weather_by_province.json"
+
+interface PriceItem {
+    id: number;
+    daya: number;
+    b_modul: number;
+    b_inverter: number;
+    b_struktur: number;
+    b_aksesoris: number;
+    b_instalsai: number;
+    total: number;
+  }
+
+  interface ResponseData {
+    solarArray: string; // or the correct type
+    numPanels: string; // or the correct type
+    areaOccupied: string; // or the correct type
+    price: PriceItem; // <- Ensure this is correctly typed as an array of PriceItem
+  }
+  const formatCurrencyIDR = (amount: number): string => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
 
 export default function Calculator() {
+    const [solarHours, setSolarHours] = useState(3.0);
+    const [selectedSolarHours, setSelectedSolarHours] = useState(true);
+    const handleRadioChange = () => setSelectedSolarHours(!selectedSolarHours);
+    const [selectedProvince, setSelectedProvince] = useState("");
+    const handleSelectChange = (value: string) => {
+        const selectedOption = provinceData.find((option) => option.name === value);
+        if (selectedOption) {
+          setSelectedProvince(value);
+          setSolarHours(selectedOption.solar_hours_per_day);
+        }
+      };
+    
+      const initialData: ResponseData = {
+        solarArray: "",
+        numPanels: "",
+        areaOccupied: "",
+        price: {} as PriceItem
+      };
+    const [data, setData] = useState<ResponseData>(initialData);
+    const [power, setPower] = useState(1300)
+    const [electricity, setElectricity] = useState(0)
+    const fetchData = async () => {
+        console.log("a")
+        try {
+            if (solarHours && electricity && power) {
+                if (solarHours >= 0 && electricity >= 0 && power >= 0 ) {
+                    console.log("b")
+
+                const response = await fetch('https://us-central1-ecotecture-9ff06.cloudfunctions.net/api/calculate/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "solar_hours": solarHours,
+                    "electricity": electricity,
+                    "power": power
+                }),
+                });
+        
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+        
+                const result = await response.json();
+                console.log(result)
+                setData({
+                    solarArray: result.solarArray,
+                    numPanels: result.numPanels,
+                    areaOccupied: result.areaOcuppied,
+                    price: result.price[0]
+                  });
+                }
+                }
+                
+          } catch (error) {
+        console.log(error)
+      }
+    };
+
+    
     return (
         <main className="relative flex min-h-screen flex-col items-center justify-between">
             {/* SVG Green Big */}
@@ -25,7 +114,7 @@ export default function Calculator() {
                                 <span className='underline decoration-8 underline-offset-1 decoration-[#448BCA]'>lator</span>
                             </div>
                             <p className="text-gray-700 font-sans text-base mb-10">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                                Simulation for solar panel with the size of 1 x 1,7 m. 
                             </p>
 
 
@@ -34,10 +123,10 @@ export default function Calculator() {
                                     <tbody>
                                         <tr className="bg-white">
                                             <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
-                                                Electricity consumption
+                                                Approximate electricity consumption per year
                                             </td>
                                             <td className="px-6 py-4">
-                                                <input type="text" id="electricity" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                                <input type="number" id="electricity" onChange={(e) => setElectricity(parseInt(e.target.value)) } className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
                                             </td>
                                             <td className="px-6 py-4">
                                                 kWh/yr
@@ -45,36 +134,179 @@ export default function Calculator() {
                                         </tr>
                                         <tr className="bg-white">
                                             <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                I know my solar hours per day
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <label className="inline-flex items-center">
+                                                    <input type="radio" id="solar_hours_1" name="solar_hours" value="1" className="form-radio text-green-500" checked={selectedSolarHours == true}
+            onChange={handleRadioChange} />
+                                                    <span className="ml-2">Yes</span>
+                                                </label>
+                                                <label className="inline-flex items-center ml-4">
+                                                    <input type="radio" id="solar_hours_2" name="solar_hours" value="2" className="form-radio text-green-500" checked={selectedSolarHours == false}
+            onChange={handleRadioChange} />
+                                                    <span className="ml-2">No</span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    {selectedSolarHours?  (
+                                        <tr className="bg-white">
+                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
                                                 Solar Hours
                                             </td>
                                             <td className="px-6 py-4">
-                                                <input type="text" id="solar_hours" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                                
+                                                <input type="number" id="solar_hours" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                                  
                                             </td>
                                             <td className="px-6 py-4">
                                                 Hours
                                             </td>
                                         </tr>
+
+
+                                    ):(
                                         <tr className="bg-white">
                                             <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
-                                                Panel Width
+                                                Solar Hours by Province
                                             </td>
                                             <td className="px-6 py-4">
-                                                <input type="text" id="panel_width" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
+                                                        <input
+                                                        type="text"
+                                                        id="province"
+                                                        list="provinceOptions"
+                                                        value={selectedProvince || ''}
+                                                        onChange={(e) =>{ e.preventDefault; setSelectedProvince(e.target.value); handleSelectChange(e.target.value)}}
+                                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+                                                        required
+                                                    />
+                                                    <datalist id="provinceOptions">
+                                                        {provinceData.map((option) => (
+                                                        <option key={option.id} value={option.name} />
+                                                            
+                                                        ))}
+                                                    </datalist>
+                                            </td>
+                                            <tr className="bg-white">
+                                                <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                    Solar Hours
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <input disabled type="number" id="solar_hours" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder={solarHours.toString()} required />
+                                                    
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    Hours
+                                                </td>
+                                            </tr>
+                                        </tr>
+                                        
+                                    )}
+                                        <tr className="bg-white">
+                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                House Power
                                             </td>
                                             <td className="px-6 py-4">
-                                                m
+                                                        <input
+                                                        type="text"
+                                                        id="province"
+                                                        list="powers"
+                                                        onChange={(e) =>{setPower(parseInt(e.target.value))}}
+                                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+                                                        required
+                                                    />
+                                                    <datalist id="powers">
+                                                        {[1300, 2200, 3500].map((option) => (
+                                                        <option key={option} value={option} />
+                                                            
+                                                        ))}
+                                                    </datalist>
+                                            </td>
+                                            <td scope="row" className="px-6 py-4">
+                                                VA
                                             </td>
                                         </tr>
+                                    </tbody>
+                                    
+                                    
+                                </table>
+                                <div className='flex items-center  justify-center text-center px-20 py-2'>
+                                    <button className='w-24 bg-blue-500 font-semibold text-white rounded p-2 items-end' onClick={fetchData}>
+                                    Submit
+                                    </button>
+                                </div>
+                                <hr></hr>
+                                <table className="w-full text-sm text-left rtl:text-right text-blue-500 font-sans">
+                                    <tbody>
                                         <tr className="bg-white">
-                                            <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
-                                                Panel Length
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <input type="text" id="panel_length" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="..." required />
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                m
-                                            </td>
+                                                <td scope="row" className="px-6 py-4 font-semibold whitespace-nowrap">
+                                                    Approximate solar array size
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <span className='underline decoration-8 underline-offset-1 text-gray-900 decoration-[#448BCA]'>{data.solarArray}</span>                                                </td>
+                                                <td className="px-6 py-4">
+                                                    kW
+                                                </td>
+                                        </tr>
+                                        <tr className="bg-white">
+                                                <td scope="row" className="px-6 py-4 font-semibold whitespace-nowrap">
+                                                    Approximate number of panels with size 1 x 1.7m: 
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                <span className='underline decoration-8 underline-offset-1 text-gray-900 decoration-[#448BCA]'>{data.numPanels}</span>                                               
+
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    panels
+                                                </td>
+                                        </tr>
+                                        <tr className="bg-white">
+                                                <td scope="row" className="px-6 py-4 font-semibold whitespace-nowrap">
+                                                    Approximate area ocuppied: 
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                <span className='underline decoration-8 underline-offset-1 text-gray-900 decoration-[#448BCA]'>{data.areaOccupied}</span>                                               
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    meter
+                                                </td>
+                                        </tr>
+                                        <tr className="bg-white">
+                                                <td scope="row" className="px-6 py-4 font-semibold whitespace-nowrap">
+                                                    Approximate price for the installation of {data.numPanels} solar panels:
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                        {!isNaN(data.price.b_modul) && (
+                                            <td className="w-min rounded px-6 py-4 space-y-2 border-2 border-blue-300 hover:border-white">
+                                                    <div className='grid grid-cols-2'>
+                                                        <p>Solar Panel Cost: </p>
+                                                        <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.b_modul)} </p>
+                                                    </div>
+                                                    <div className='grid grid-cols-2'>
+                                                        <p>Inverter Cost: </p>
+                                                        <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.b_inverter)} </p>
+                                                    </div>
+                                                    <div className='grid grid-cols-2'>
+                                                        <p>Structure Cost: </p>
+                                                        <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.b_struktur)} </p>
+                                                    </div>
+                                                    <div className='grid grid-cols-2'>
+                                                        <p>Accessories Cost:: </p>
+                                                        <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.b_aksesoris)} </p>
+                                                    </div>
+                                                    <div className='grid grid-cols-2'>
+                                                        <p>Installation Cost: </p>
+                                                        <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.b_instalsai)} </p>
+                                                    </div>
+                                                    <hr></hr>
+                                                    <div className='grid grid-cols-2'>
+                                                        <p>Total: </p>
+                                                        <p className='bg-blue-400 p-1 rounded w-min min-w-0 text-white'>{formatCurrencyIDR(data.price.total)} </p>
+                                                    </div>
+                                                </td>
+                                        )}
+                                        
                                         </tr>
                                     </tbody>
                                 </table>
