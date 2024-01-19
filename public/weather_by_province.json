@@ -1,6 +1,14 @@
 
 [
   {
+    "id": "-1",
+    "name": "NATIONAL",
+    "solar_hours_per_day": 0,
+    "wind_strength": 0,
+    "rain_power": "Low"
+
+  },
+  {
     "id": "11",
     "name": "ACEH",
     "solar_hours_per_day": 5.5,
