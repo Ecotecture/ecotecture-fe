@@ -159,7 +159,7 @@ export default function Home() {
         </div>
         {/* Weather Checker Row */}
         <div className="z-10 mb-44 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg">
+          <div className="max-w-sm bg-white rounded overfzlow-hidden shadow-lg">
             <div className="px-6 py-6">
               <div className="font-sans font-semibold text-2xl mb-10 ">Weather {' '}
                 <span className='underline decoration-8 underline-offset-1 decoration-[#448BCA]'>Checker</span>
