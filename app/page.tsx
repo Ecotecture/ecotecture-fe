@@ -213,7 +213,7 @@ export default function Home() {
                             Wind Strength
                           </td>
                           <td className="px-6 py-4">
-                            {provinceData?.wind_strength ?? ''} m
+                            {provinceData?.wind_strength ?? ''} Km/h
                           </td>
                         </tr>
                         <tr className="bg-white">
@@ -228,7 +228,7 @@ export default function Home() {
                     </table>
                   </div>
                   <p className="text-gray-700 font-sans text-base mb-5">
-                    Therefor we recommend you to use:
+                    Therefore we recommend you to use:
                   </p>
                   <div className="relative overflow-x-auto">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-400">
