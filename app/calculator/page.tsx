@@ -273,7 +273,7 @@ export default function Calculator() {
                                         </tr>
                                         <tr className="bg-white">
                                                 <td scope="row" className="px-6 py-4 font-semibold whitespace-nowrap">
-                                                    Approximate price for the installation of solar panel with house power of {power} VA:
+                                                    Average price for the installation of solar panel with house power of {power} VA:
                                                 </td>
                                         </tr>
                                         <tr>
