@@ -20,13 +20,10 @@ export default function Navbar() {
               <a href="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2" aria-current="page">Home</a>
             </li>
             <li>
-              <a href="#" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">About</a>
+              <a href="/calculator" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Solar Panel Simulator</a>
             </li>
             <li>
-              <a href="#" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Contact</a>
-            </li>
-            <li>
-              <a href="#" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Help</a>
+              <a href="/service" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Green Architecture Service</a>
             </li>
           </ul>
         </div>
