@@ -171,21 +171,21 @@ export default function Calculator() {
                                                 Solar Hours by Province
                                             </td>
                                             <td className="px-6 py-4">
-                                                        <input
-                                                        type="text"
-                                                        id="province"
-                                                        list="provinceOptions"
-                                                        value={selectedProvince || ''}
-                                                        onChange={(e) =>{ e.preventDefault; setSelectedProvince(e.target.value); handleSelectChange(e.target.value)}}
-                                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
-                                                        required
-                                                    />
-                                                    <datalist id="provinceOptions">
-                                                        {provinceData.map((option) => (
-                                                        <option key={option.id} value={option.name} />
-                                                            
-                                                        ))}
-                                                    </datalist>
+                                            <select
+                                                id="province"
+                                                value={selectedProvince || ''}
+                                                onChange={(e) => { setSelectedProvince(e.target.value); handleSelectChange(e.target.value) }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+                                                required
+                                                >
+                                                <option value="" disabled>Select Province</option>
+                                                {provinceData.map((option) => (
+                                                    <option key={option.id} value={option.name}>
+                                                    {option.name}
+                                                    </option>
+                                                ))}
+                                                </select>
+
                                             </td>
                                             <tr className="bg-white">
                                                 <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
@@ -207,20 +207,20 @@ export default function Calculator() {
                                                 House Power
                                             </td>
                                             <td className="px-6 py-4">
-                                                        <input
-                                                        type="text"
-                                                        id="province"
-                                                        list="powers"
-                                                        onChange={(e) =>{setPower(parseInt(e.target.value))}}
-                                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
-                                                        required
-                                                    />
-                                                    <datalist id="powers">
-                                                        {[1300, 2200, 3500].map((option) => (
-                                                        <option key={option} value={option} />
-                                                            
-                                                        ))}
-                                                    </datalist>
+                                            <select
+                                            id="province"
+                                            onChange={(e) => { setPower(parseInt(e.target.value)) }}
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+                                            required
+                                            >
+                                            <option value="" disabled>Select Power</option>
+                                            {["1300", "2200", "3500"].map((option) => (
+                                                <option key={option} value={option}>
+                                                {option}
+                                                </option>
+                                            ))}
+                                            </select>
+
                                             </td>
                                             <td scope="row" className="px-6 py-4">
                                                 VA
