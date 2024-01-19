@@ -23,7 +23,7 @@ export default function Navbar() {
               <a href="/calculator" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Solar Panel Simulator</a>
             </li>
             <li>
-              <a href="/architecture" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Green Architecture</a>
+              <a href="/service" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-[#272A5A] no-underline hover:underline hover:underline-offset-8 hover:decoration-[#257251] hover:decoration-2">Green Architecture Service</a>
             </li>
           </ul>
         </div>
