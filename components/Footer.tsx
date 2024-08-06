@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-white">
+        <div className="bg-white">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
                     <div>
@@ -78,6 +78,6 @@ export default function Footer() {
                     </span>
                 </div>
             </div>
-        </footer>
+        </div>
     )
 }
